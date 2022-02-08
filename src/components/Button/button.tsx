@@ -13,7 +13,7 @@ export enum ButtonType {
 	Link = 'link'
 }
 
-interface BaseButtonProps {
+interface BaseButtonProps extends React.ButtonHTMLAttributes<HTMLElement> {
 	className?: string;
 	disabled?: boolean;
 	size?: ButtonSize;
@@ -22,16 +22,24 @@ interface BaseButtonProps {
 	href?: string;
 }
 
-const Button: React.FC<BaseButtonProps> = (props) => {
+// intersections
+type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>;
+type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>;
+// utility type, make all attributes optional
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
+
+const Button: React.FC<ButtonProps> = (props) => {
 	const {
 		btnType,
 		disabled,
+		className,
 		size,
 		children,
 		href,
+		...restprops
 	} = props;
 	// btn, btn-lg, btn-primary
-	const classes = classNames('btn', {
+	const classes = classNames('btn', className, {
 		[`btn-${btnType}`]: btnType,
 		[`btn-${size}`]: size,
 		'disabled': (btnType === 'link') && disabled
@@ -41,6 +49,7 @@ const Button: React.FC<BaseButtonProps> = (props) => {
 			<a
 				className={classes}
 				href={href}
+				{...restprops}
 			>
 				{children}
 			</a>
@@ -50,6 +59,7 @@ const Button: React.FC<BaseButtonProps> = (props) => {
 			<button
 				className={classes}
 				disabled={disabled}
+				{...restprops}
 			>
 				{children}
 			</button>
