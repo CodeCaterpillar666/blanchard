@@ -1,14 +1,14 @@
 import React from 'react';
+import Button, { ButtonType, ButtonSize } from './components/Button/button';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>h1</h1>
-        <h2>h2</h2>
-        <h3>h3</h3>
-        <hr />
-        <code>const a = 'b';</code>
+        <Button>Hello</Button>
+        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>Large</Button>
+        <Button btnType={ButtonType.Link} href="www.google.com">Google Link</Button>
+        <Button disabled btnType={ButtonType.Link} href="www.google.com">Google Link</Button>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>

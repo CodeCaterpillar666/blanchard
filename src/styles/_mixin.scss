@@ -1,0 +1,37 @@
+@mixin button-size($padding-y, $padding-x, $font-size, $border-radius) {
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/padding
+    // padding: vertival | horizontal
+    padding: $padding-y $padding-x;
+    font-size: $font-size;
+    border-radius: $border-radius;
+}
+
+@mixin button-style(
+    $background,
+    $border,
+    $color,
+    $hover-background: lighten($background, 7.5%),
+    $hover-border: lighten($border, 10%),
+    $hover-color: color,
+) {
+    color: $color;
+    background: $background;
+    border-color: $border;
+    &:hover {
+        color: $hover-color;
+        background: $hover-background;
+        border-color: $hover-border;
+    }
+    &:focus, // fake class
+    &.focus { // class
+        color: $hover-color;
+        background: $hover-background;
+        border-color: $hover-border;
+    }
+    &:disabled, // fake class
+    &.disabled { // class
+        color: $color;
+        background: $background;
+        border-color: $border;
+    }
+}
