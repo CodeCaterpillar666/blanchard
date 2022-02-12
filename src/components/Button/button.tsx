@@ -13,7 +13,7 @@ export enum ButtonType {
 	Link = 'link'
 }
 
-interface BaseButtonProps extends React.ButtonHTMLAttributes<HTMLElement> {
+interface BaseButtonProps {
 	className?: string;
 	disabled?: boolean;
 	size?: ButtonSize;
@@ -32,7 +32,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 	const {
 		btnType,
 		disabled,
-		className,
+		className,  // user custom class
 		size,
 		children,
 		href,
