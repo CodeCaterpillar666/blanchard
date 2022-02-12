@@ -35,5 +35,8 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
     );
 };
 
+// displayName
+// https://reactjs.org/docs/react-component.html#displayname
+// explicitly set displayName here to help us check component type in Menu's renderChildren method
 MenuItem.displayName = 'MenuItem';
 export default MenuItem;

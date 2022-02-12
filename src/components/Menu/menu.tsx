@@ -39,23 +39,43 @@ const Menu: React.FC<MenuProps> = (props) => {
         index: currentActive? currentActive : 0,
         onSelect: handleClick,
     }
-    const renderChildern = () => {
+    const renderChildren = () => {
+        // "React.Children provides utilities for dealing with the this.props.children opaque data structure."
+        // https://reactjs.org/docs/react-api.html#reactchildren
         return React.Children.map(children, (child, index) => {
+            /**
+             * 1.childElement is an instance of its Component/type, and its Component/type is <MenuItem> whose type is React.FunctionComponent
+             *   so we need to set childElement as React.FunctionComponentElement and pass in the props type of <MenuItem> to make it work
+             * 2.By clicking this type with CONTROL, we could know that:
+             *   a.interface FunctionComponentElement<P> extends ReactElement<P, FunctionComponent<P>>
+             *   b.ReactElement has a property 'type'
+            */
             const childElement = child as React.FunctionComponentElement<MenuItemProps>
+            // Since childElement is an instance of <MenuItem> type, and we have defined <MenuItem> type's displayNmae as 'MenuItem'
+            // so that we could easily check one's displayName to ensure that it is a <MenuItem>, so we could get childELement's displayName
+            // through its type property, which refers to React.FUnctionComponent<MenuItemProps>, and we could find an optional parameter
+            // diaplayName in the definetion of React.FunctionComponent as follows:
+                // interface FunctionComponent<P = {}> {
+                //     (props: PropsWithChildren<P>, context?: any): ReactElement<any, any> | null;
+                //     propTypes?: WeakValidationMap<P> | undefined;
+                //     contextTypes?: ValidationMap<any> | undefined;
+                //     defaultProps?: Partial<P> | undefined;
+                //     displayName?: string | undefined;
+            // }
             const {displayName} = childElement.type
             if (displayName === 'MenuItem' || displayName === 'SubMenu') {
                 // use React.cloneElement to auto-add index property into each child component
-                return React.cloneElement(childElement, {index})
+                return React.cloneElement(childElement, {index});
             } else {
-                console.log('Warning: Menu has a child which is not a MenuItem component')
+                console.error('Warning: Menu has a child which is not a MenuItem nor SubMenu');
             }
-        })
+        });
     }
     return (
         <>
             <ul className={classes} style={style} data-testid="test-menu">
                 <MenuContext.Provider value={passedContext}>
-                    {renderChildern()}
+                    {renderChildren()}
                 </MenuContext.Provider>
             </ul>
         </>
