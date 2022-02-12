@@ -1,27 +1,31 @@
 import React from 'react';
-import Button, { ButtonType, ButtonSize } from './components/Button/button';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
+import SubMenu from './components/Menu/subMenu'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Menu defaultIndex={0} onSelect={(index)=>{alert(index)}} mode={'vertical'}>
-          <MenuItem index={0}>
+        <Menu defaultIndex={0} onSelect={(index)=>{alert(index)}}>
+          <MenuItem>
             cool link 1
           </MenuItem>
-          <MenuItem disabled index={1}>
+          <MenuItem disabled>
             cool link 2
           </MenuItem>
-          <MenuItem index={2}>
+          <SubMenu title='dropdown'>
+            <MenuItem>
+              drop down 1
+            </MenuItem>
+            <MenuItem>
+              drop down 2
+            </MenuItem>
+          </SubMenu>
+          <MenuItem>
             cool link 3
           </MenuItem>
         </Menu>
-        <Button>Hello</Button>
-        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>Large</Button>
-        <Button btnType={ButtonType.Link} href="www.google.com">Google Link</Button>
-        <Button disabled btnType={ButtonType.Link} href="www.google.com">Google Link</Button>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>

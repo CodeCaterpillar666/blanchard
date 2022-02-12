@@ -27,6 +27,7 @@ const Menu: React.FC<MenuProps> = (props) => {
     const [currentActive, setActive] = useState(defaultIndex);
     const classes = classNames('menu', className, {
         'menu-vertical': mode === 'vertical',
+        'menu-horizontal': mode !== 'vertical',
     });
     const handleClick = (index: number) => {
         setActive(index);
@@ -42,7 +43,7 @@ const Menu: React.FC<MenuProps> = (props) => {
         return React.Children.map(children, (child, index) => {
             const childElement = child as React.FunctionComponentElement<MenuItemProps>
             const {displayName} = childElement.type
-            if (displayName === 'MenuItem') {
+            if (displayName === 'MenuItem' || displayName === 'SubMenu') {
                 // use React.cloneElement to auto-add index property into each child component
                 return React.cloneElement(childElement, {index})
             } else {
