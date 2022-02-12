@@ -1,34 +1,48 @@
-import React from "react";
+import React, { useState, createContext } from "react";
 import classNames from "classnames";
 
 // typescript, string literal type
 type MenuMode = 'horizontal' | 'vertical';
+type selectCallback = (selectIndex: number) => void;
 
 export interface MenuProps {
     defaultIndex?: number;
     className?: string;
     mode?: MenuMode;
     style?: React.CSSProperties;
-    onSelect?: (selectIndex: number) => void;
+    onSelect?: selectCallback;
 }
 
-const Menu: React.FC<MenuProps> = (props) => {
-    const {
-        defaultIndex,
-        className,
-        mode,
-        style,
-        children,
-    } = props;
+interface IMenuContext {
+    index: number;
+    onSelect?: selectCallback;
+}
 
+export const MenuContext = createContext<IMenuContext>({index: 0});
+
+const Menu: React.FC<MenuProps> = (props) => {
+    const { defaultIndex, className, mode, style, children, onSelect } = props;
+    // indicate which MenuItem is being focused
+    const [currentActive, setActive] = useState(defaultIndex);
     const classes = classNames('menu', className, {
         'menu-vertical': mode === 'vertical',
     });
-
+    const handleClick = (index: number) => {
+        setActive(index);
+        if (onSelect) {
+            onSelect(index)
+        }
+    };
+    const passedContext: IMenuContext = {
+        index: currentActive? currentActive : 0,
+        onSelect: handleClick,
+    }
     return (
         <>
             <ul className={classes} style={style}>
-                {children}
+                <MenuContext.Provider value={passedContext}>
+                    {children}
+                </MenuContext.Provider>
             </ul>
         </>
     );
