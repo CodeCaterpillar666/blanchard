@@ -20,7 +20,6 @@ const SubMenu: React.FC<SubMenuProps> = ({ index, title, children, className }) 
     });
     let timer: any;
     const handleMouse = (e: React.MouseEvent, toggle: boolean) => {
-        setOpen(toggle)
         clearTimeout(timer)
         e.preventDefault()
         timer = setTimeout(() => {
