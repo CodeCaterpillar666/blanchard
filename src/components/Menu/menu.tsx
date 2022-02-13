@@ -17,6 +17,10 @@ export interface MenuProps {
 interface IMenuContext {
     index: number;
     onSelect?: selectCallback;
+    // pass mode into context, so SubMenu component could decide its display logic:
+    // 1.'horizontal' mode, SubMenu displays when mouse hovers on it
+    // 2.'vertical' mode, SubMenu displays when it is clicked
+    mode?: MenuMode;
 }
 
 export const MenuContext = createContext<IMenuContext>({index: 0});
@@ -38,6 +42,7 @@ const Menu: React.FC<MenuProps> = (props) => {
     const passedContext: IMenuContext = {
         index: currentActive? currentActive : 0,
         onSelect: handleClick,
+        mode: mode,
     }
     const renderChildren = () => {
         // "React.Children provides utilities for dealing with the this.props.children opaque data structure."
