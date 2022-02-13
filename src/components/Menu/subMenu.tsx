@@ -21,11 +21,11 @@ const SubMenu: React.FC<SubMenuProps> = ({ index, title, children, className }) 
     let timer: any;
     const handleMouse = (e: React.MouseEvent, toggle: boolean) => {
         setOpen(toggle)
-        // clearTimeout(timer)
-        // e.preventDefault()
-        // timer = setTimeout(() => {
-        //     setOpen(toggle)
-        // }, 0)
+        clearTimeout(timer)
+        e.preventDefault()
+        timer = setTimeout(() => {
+            setOpen(toggle)
+        }, 0)
     }
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -69,8 +69,8 @@ const SubMenu: React.FC<SubMenuProps> = ({ index, title, children, className }) 
     return (
         <>
             {/* put hoverEvents on outer layer <li> so that when mouse hovers on out layer it will still be handled */}
-            <li key={index} className={classes} {...hoverEvents} {...clickEvents}>
-                <div className='submenu-title' >
+            <li key={index} className={classes} {...hoverEvents}>
+                <div className='submenu-title' {...clickEvents}>
                     {title}
                 </div>
                 {renderChildren()}
