@@ -29,7 +29,34 @@
   }
   .submenu-item {
     position: relative;
+    .submenu-title {
+      display: flex;
+      align-items: center;
+    }
+    .arrow-icon {
+      transition: transform .25s ease-in-out;
+      margin-left: 3px;
+    }
+    &:hover {
+      .arrow-icon {
+        transform: spin(180deg);
+      }
+    }
   } 
+
+  .is-vertical {
+    .arrow-icon {
+      transform: rotate(0deg) !important;
+    }
+  }
+
+  // when menu in vertical mode, only clicked is-opened subMenu's arrow icon will be rotated
+  .is-vertical.is-opened {
+    .arrow-icon {
+      transform: rotate(180deg) !important;
+    }
+  }
+
   .submenu {
     display: none;
     list-style:none;
