@@ -1,0 +1,7 @@
+// sass @each to iterate through a list or map
+// https://sass-lang.com/documentation/at-rules/control/each
+@each $key, $val in $theme-colors {
+    .icon-#{$key} {
+        color: $val;
+    }
+}

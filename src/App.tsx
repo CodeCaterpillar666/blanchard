@@ -2,11 +2,19 @@ import React from 'react';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/subMenu'
+import Icon from './components/Icon/icon';
+// Add imported icons globally
+// https://fontawesome.com/v6/docs/web/use-with/react/add-icons#add-icons-globally
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons';
+library.add(fas);
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Icon icon="arrow-down" size="10x" theme="primary" />
+
         <Menu defaultIndex={'0'} onSelect={(index)=>{alert(index)}} mode={'vertical'} defaultOpenSubMenus={['2']}>
           <MenuItem>
             cool link 1
