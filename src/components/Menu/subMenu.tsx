@@ -28,9 +28,10 @@ const SubMenu: React.FC<SubMenuProps> = ({ index, title, children, className }) 
     const handleMouse = (e: React.MouseEvent, toggle: boolean) => {
         clearTimeout(timer)
         e.preventDefault()
+        // set timeout to prevent submenu twinkle
         timer = setTimeout(() => {
             setOpen(toggle)
-        }, 0)
+        }, 200)
     }
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -74,7 +75,6 @@ const SubMenu: React.FC<SubMenuProps> = ({ index, title, children, className }) 
                 <ul className={subMenuClasses}>
                     {childrenComponent}
                 </ul>
-                <p>hello</p>
             </Transition>
         );
     }

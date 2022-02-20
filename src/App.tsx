@@ -66,6 +66,7 @@ const App: React.FC = () => {
           in={show}
           timeout={300}
           animation={'zoom-in-left'}
+          wrapper
         >
           <Button btnType={'primary'} size={'lg'}>A Large Button</Button>
         </Transition>
