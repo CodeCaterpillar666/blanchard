@@ -8,6 +8,8 @@ import useClickOutside from '../../hooks/useClickOutside'
 
 interface DataSourceObject {
   value: string;
+  // github url
+  html_url: string;
 } 
 // use generic type to handle different incoming data source's structure
 export type DataSourceType<T = {}> = T & DataSourceObject
@@ -65,6 +67,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
     setHighlightIndex(-1)
   }, [debouncedValue, fetchSuggestions])
 
+  // Deal with highlight index
   const highlight = (index: number) => {
     if (index < 0) index = 0
     if (index >= suggestions.length) {
@@ -74,16 +77,24 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    // log for test highlightIndex works with keyboard event
+    // console.log(e.code)
+    // console.log(highlightIndex)
+
+    // KeyboardEvent.keyCode is deprecated
+    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
+    // use KeyboardEvent.code instead
+    // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code
     switch(e.code) {
-      case '13':
+      case 'Enter':
         if (suggestions[highlightIndex]) {
           handleSelect(suggestions[highlightIndex])
         }
         break
-      case '38':
+      case 'ArrowUp':
         highlight(highlightIndex - 1)
         break
-      case '40':
+      case 'ArrowDown':
         highlight(highlightIndex + 1)
         break
       case '27':
@@ -101,13 +112,16 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
     triggerSearch.current = true
   }
 
-  const handleSelect = (item: DataSourceType) => {
+  const handleSelect = (item: DataSourceType, selectCallback?: () => void) => {
     setInputValue(item.value)
     setShowDropdown(false)
     if (onSelect) {
       onSelect(item)
     }
     triggerSearch.current = false
+    // https://developer.mozilla.org/en-US/docs/Web/API/Window/open
+    // when user selects one of the suggestions item, open the item's page
+    window.open(suggestions[highlightIndex].html_url)
   }
 
   // custom rendering

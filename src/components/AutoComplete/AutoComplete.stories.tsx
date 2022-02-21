@@ -33,7 +33,7 @@ export const GithubUserAutoComplete = () => {
     const itemWithGithub = item as DataSourceType<GithubUserProps>
     return (
       <>
-        <h2>Name: {itemWithGithub.value}</h2>
+        <h6>Name: {itemWithGithub.value}</h6>
         <p>url: {itemWithGithub.url}</p>
       </>
     )
