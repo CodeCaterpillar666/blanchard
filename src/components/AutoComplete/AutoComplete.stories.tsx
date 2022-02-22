@@ -19,7 +19,7 @@ interface GithubUserProps {
   avatar_url: string;
 }
 
-export const GithubUserAutoComplete = () => {
+export const SearchGithubUserAutoComplete = () => {
   const handleFetch = (query: string) => {
     return fetch(`https://api.github.com/search/users?q=${query}`)
       .then(res => res.json())
@@ -40,10 +40,56 @@ export const GithubUserAutoComplete = () => {
   }
 
   return (
-    <AutoComplete 
-      fetchSuggestions={handleFetch}
-      onSelect={action('selected')}
-      renderOption={renderOption}
-    />
+    <>
+      <label>
+        Search Github User
+      </label>
+      <AutoComplete 
+        fetchSuggestions={handleFetch}
+        onSelect={action('selected')}
+        renderOption={renderOption}
+      />
+    </>
+  )
+}
+
+interface GithubRepoProps {
+  name: string;
+  url: string;
+  avatar_url: string;
+}
+
+export const SearchGithubRepoAutoComplete = () => {
+  const handleFetch = (query: string) => {
+    // https://docs.github.com/en/rest/reference/search#search-repositories
+    return fetch(`https://api.github.com/search/repositories?q=${query}`)
+      .then(res => res.json())
+      .then(({ items }) => {
+        console.log(items)
+        return items.slice(0, 10).map((item: any) => ({ value: item.login, ...item}))
+      })
+  }
+
+  const renderOption = (item: DataSourceType) => {
+    const itemWithGithub = item as DataSourceType<GithubRepoProps>
+    return (
+      <>
+        <h6>Name: {itemWithGithub.name}</h6>
+        <p>url: {itemWithGithub.url}</p>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <label>
+        Search Github Repo
+      </label>
+      <AutoComplete 
+        fetchSuggestions={handleFetch}
+        onSelect={action('selected')}
+        renderOption={renderOption}
+      />
+    </>
   )
 }

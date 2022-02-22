@@ -112,6 +112,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
     triggerSearch.current = true
   }
 
+  // TODO, how to set a callback if the callback needs parameters inside suggestions?
   const handleSelect = (item: DataSourceType, selectCallback?: () => void) => {
     setInputValue(item.value)
     setShowDropdown(false)
