@@ -25,7 +25,7 @@ export const SearchGithubUserAutoComplete = () => {
       .then(res => res.json())
       .then(({ items }) => {
         console.log(items)
-        return items.slice(0, 10).map((item: any) => ({ value: item.login, ...item}))
+        return items?.slice(0, 10)?.map((item: any) => ({ value: item.login, ...item}))
       })
   }
 
