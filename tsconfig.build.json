@@ -7,7 +7,6 @@
         "jsx": "react",
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
-        "__comment__": "to fix import issue in build process, add 'skipLibCheck', https://github.com/webpack/webpack/issues/12185",
         "skipLibCheck": true
     },
     "include": [
