@@ -43,7 +43,7 @@ export var Input = function (props) {
         delete restProps.defaultValue;
         restProps.value = fixControlledValue(props.value);
     }
-    return (React.createElement("div", { className: cnames, style: style },
+    return (React.createElement("div", { className: cnames, style: style, "data-testid": "test" },
         prepend && React.createElement("div", { className: "input-group-prepend" }, prepend),
         icon && React.createElement("div", { className: "icon-wrapper" },
             React.createElement(Icon, { icon: icon, title: "title-".concat(icon) })),

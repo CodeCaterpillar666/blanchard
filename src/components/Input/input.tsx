@@ -29,7 +29,7 @@ export const Input: React.FC<InputProps> = (props) => {
     'is-disabled': disabled,
     'input-group': prepend || append,
     'input-group-append': !!append,
-    'input-group-prepend': !!prepend
+    'input-group-prepend': !!prepend,
   })
   const fixControlledValue = (value: any) => {
     if (typeof value === 'undefined' || value === null) {
@@ -42,7 +42,7 @@ export const Input: React.FC<InputProps> = (props) => {
     restProps.value = fixControlledValue(props.value)
   }
   return (
-    <div className={cnames} style={style}>
+    <div className={cnames} style={style} data-testid="test" >
       {prepend && <div className="input-group-prepend">{prepend}</div>}
       {icon && <div className="icon-wrapper"><Icon icon={icon} title={`title-${icon}`}/></div>}
       <input 

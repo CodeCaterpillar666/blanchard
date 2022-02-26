@@ -70,14 +70,14 @@ const App: React.FC = () => {
         >
           <Button btnType={'primary'} size={'lg'}>A Large Button</Button>
         </Transition>
-        {/* <a
+        <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
           Learn React
-        </a> */}
+        </a>
       </header>
     </div>
   );

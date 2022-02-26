@@ -46,6 +46,7 @@ var App = function () {
                         React.createElement("code", null, "src/App.tsx"),
                         " and save to reload."))),
             React.createElement(Transition, { in: show, timeout: 300, animation: 'zoom-in-left', wrapper: true },
-                React.createElement(Button, { btnType: 'primary', size: 'lg' }, "A Large Button")))));
+                React.createElement(Button, { btnType: 'primary', size: 'lg' }, "A Large Button")),
+            React.createElement("a", { className: "App-link", href: "https://reactjs.org", target: "_blank", rel: "noopener noreferrer" }, "Learn React"))));
 };
 export default App;

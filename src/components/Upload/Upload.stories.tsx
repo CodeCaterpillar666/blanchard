@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
 import { action } from '@storybook/addon-actions'
 import Icon from '../Icon/icon'
 import Upload from './upload';
